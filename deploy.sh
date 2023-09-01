@@ -2,11 +2,8 @@
 
 echo "Generating passwords..."
 
-UNLOCK_WORDS=3
-DELETE_WORDS=6
-
-UNLOCK_PASSWORD=$(python3 generate_passphrase.py $UNLOCK_WORDS)
-DELETE_PASSWORD=$(python3 generate_passphrase.py $DELETE_WORDS)
+UNLOCK_PASSWORD=$(python3 generate_passphrase.py 3)
+DELETE_PASSWORD=$(python3 generate_passphrase.py 6)
 
 echo "Sending Telegram message..."
 
