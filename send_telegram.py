@@ -3,9 +3,16 @@ import urllib.parse
 import argparse
 
 
-def main(token, user_id, message):
+def main(token: str, user_id: int, message: str):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    data = urllib.parse.urlencode({"chat_id": user_id, "text": message}).encode("utf-8")
+    message = message.encode("utf-8").decode("unicode_escape")
+    data = urllib.parse.urlencode(
+        {
+            "chat_id": user_id,
+            "text": message,
+        }
+    ).encode("utf-8")
+
     req = urllib.request.Request(url, data)
     urllib.request.urlopen(req)
 

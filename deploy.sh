@@ -8,15 +8,10 @@ DELETE_WORDS=6
 UNLOCK_PASSWORD=$(python3 generate_passphrase.py $UNLOCK_WORDS)
 DELETE_PASSWORD=$(python3 generate_passphrase.py $DELETE_WORDS)
 
-echo "Sending mail..."
+echo "Sending Telegram message..."
 
 source ./.env
-python3 send_mail.py $SMTP_SERVER $SMTP_PORT "$MAIL_SUBJECT" "$(
-  cat <<EOM
-Unlock password: $UNLOCK_PASSWORD
-Delete password: $DELETE_PASSWORD
-EOM
-)" $MAIL_FROM $MAIL_TO $MAIL_USERNAME $MAIL_PASSWORD
+python3 send_telegram.py --token $TELEGRAM_BOT_TOKEN --user $TELEGRAM_USER_ID --message "Unlock password: $UNLOCK_PASSWORD\nDelete password: $DELETE_PASSWORD"
 
 echo "Starting container..."
 
