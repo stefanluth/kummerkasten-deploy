@@ -1,0 +1,42 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: kummerkasten-deployment-cronjob
+spec:
+  schedule: "0 4 * * 1" # Every Monday at 4am
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          initContainers:
+            - name: password-generator
+              image: ghcr.io/stefanluth/kummerkasten-deploy:latest
+              command: ["/entrypoint.sh"]
+              volumeMounts:
+                - name: shared-volume
+                  mountPath: /shared
+              env:
+                - name: TELEGRAM_BOT_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: telegram-secrets
+                      key: bot-token
+                - name: TELEGRAM_USER_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: telegram-secrets
+                      key: user-id
+
+          containers:
+            - name: kummerkasten
+              image: ghcr.io/stefanluth/kummerkasten:latest
+              volumeMounts:
+                - name: shared-volume
+                  mountPath: /shared
+              command: ["/bin/sh", "-c"]
+              args:
+                - "export UNLOCK_PASSWORD=$(cat /shared/unlock.txt);"
+                - "export DELETE_PASSWORD=$(cat /shared/delete.txt);"
+                - 'exec "npm run start"'
+
+          restartPolicy: OnFailure

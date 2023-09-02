@@ -1,18 +1,16 @@
 # kummerkasten-deploy
 
-Dieses Repository dient zum Deployen des [Kummerkastens](https://github.com/stefanluth/kummerkasten).
+Dieses Repository dient zum Deployen des [Kummerkastens](https://github.com/stefanluth/kummerkasten)
+in ein Kubernetes Cluster.
 
 ## Deployment
 
-Das `.env.template` benutzen, und die benötigten Daten eingeben.
-
 ```shell
-mv .env.template .env
-vim .env
+kubectl create secret generic telegram-secrets \
+    --from-literal=bot-token="YOUR_BOT_TOKEN" \
+    --from-literal=user-id="YOUR_USER_ID"
 ```
 
-Dann das Deployment-Skript ausführen.
-
 ```shell
-sh deploy.sh
+kubectl apply -f kummerkasten-deployment.yaml
 ```
