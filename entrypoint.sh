@@ -11,4 +11,8 @@ python3 send_telegram.py \
   --user $TELEGRAM_USER_ID \
   --message "Unlock password: $UNLOCK_PASSWORD\nDelete password: $DELETE_PASSWORD"
 
+if [ -z "$1" ]; then
+  exit 0
+fi
+
 exec "$@"
