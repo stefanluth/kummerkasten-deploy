@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 UNLOCK_PASSWORD=$(python3 generate_passphrase.py 3)
 DELETE_PASSWORD=$(python3 generate_passphrase.py 6)
