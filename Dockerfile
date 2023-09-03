@@ -10,4 +10,4 @@ COPY send_telegram.py .
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/deploy/entrypoint.sh"]
