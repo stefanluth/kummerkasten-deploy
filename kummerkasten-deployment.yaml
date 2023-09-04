@@ -38,6 +38,10 @@ spec:
                 - name: kummerkasten-data
                   mountPath: /shared
               command: ["/bin/sh", "-c"]
-              args: ["export UNLOCK_PASSWORD=$(cat /shared/unlock.txt); export DELETE_PASSWORD=$(cat /shared/delete.txt); exec npm run start"]
+              args:
+                - >
+                  export UNLOCK_PASSWORD=$(cat /shared/unlock.txt);
+                  export DELETE_PASSWORD=$(cat /shared/delete.txt);
+                  exec npm run start
 
           restartPolicy: OnFailure
