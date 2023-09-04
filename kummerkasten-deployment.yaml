@@ -8,6 +8,10 @@ spec:
     spec:
       template:
         spec:
+          volumes:
+            - name: kummerkasten-data
+              emptyDir: {}
+
           initContainers:
             - name: password-generator
               image: ghcr.io/stefanluth/kummerkasten-deploy:latest
