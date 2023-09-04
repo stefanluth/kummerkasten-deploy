@@ -13,7 +13,7 @@ spec:
               image: ghcr.io/stefanluth/kummerkasten-deploy:latest
               command: ["/deploy/entrypoint.sh"]
               volumeMounts:
-                - name: shared-volume
+                - name: kummerkasten-data
                   mountPath: /shared
               env:
                 - name: TELEGRAM_BOT_TOKEN
@@ -31,7 +31,7 @@ spec:
             - name: kummerkasten
               image: ghcr.io/stefanluth/kummerkasten:latest
               volumeMounts:
-                - name: shared-volume
+                - name: kummerkasten-data
                   mountPath: /shared
               command: ["/bin/sh", "-c"]
               args:
