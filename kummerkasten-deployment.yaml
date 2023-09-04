@@ -11,7 +11,7 @@ spec:
           initContainers:
             - name: password-generator
               image: ghcr.io/stefanluth/kummerkasten-deploy:latest
-              command: ["/entrypoint.sh"]
+              command: ["/deploy/entrypoint.sh"]
               volumeMounts:
                 - name: shared-volume
                   mountPath: /shared
