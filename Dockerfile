@@ -1,6 +1,4 @@
-FROM alpine/k8s:1.25.13
-RUN apk add --no-cache python3 py3-pip
-RUN pip3 install --upgrade pip
+FROM python:3.10
 
 WORKDIR /deploy
 COPY words.txt .
